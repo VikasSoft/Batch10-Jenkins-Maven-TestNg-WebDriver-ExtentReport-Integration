@@ -1,9 +1,12 @@
 package cofig;
 
+import java.awt.image.RescaleOp;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+
+import com.google.common.io.Resources;
 
 public class ConfigManager {
 
@@ -17,7 +20,8 @@ public class ConfigManager {
 			// load from file
 			try {
 				props = new Properties();
-				props.load(new FileInputStream(Constants.PROP_PATH));
+				//props.load(new FileInputStream(Constants.PROP_PATH));
+				props.load(Resources.getResource(Constants.PROP_PATH).openStream());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
