@@ -1,7 +1,5 @@
 package cofig;
 
-import java.awt.image.RescaleOp;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -10,30 +8,55 @@ import com.google.common.io.Resources;
 
 public class ConfigManager {
 
-	private static Properties props;
-	private static final String BROWSERS="BROWSERS";
-	private ConfigManager(){}
+	private static ConfigManager configInstance;
+	private Properties props;
+	private static final String BROWSERS = "BROWSERS";
+	private static final String USE_GRID = "USE_GRID";
+	private static final String GRID_HUB_URL = "GRID_HUB_URL";
+
+	private ConfigManager() {
+		props = new Properties();
+	}
 	
-	public static String getprop(String key){
+	public static ConfigManager getInstance(){
 		
-		if(props==null){
+		if (configInstance == null) {
 			// load from file
 			try {
-				props = new Properties();
-				//props.load(new FileInputStream(Constants.PROP_PATH));
-				props.load(Resources.getResource(Constants.PROP_PATH).openStream());
+				configInstance = new ConfigManager();
+				// props.load(new FileInputStream(Constants.PROP_PATH));
+				configInstance.props.load(Resources.getResource(Constants.PROP_PATH).openStream());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		return props.getProperty(key);
-			
+		return configInstance;
+	}
+	public String getprop(String key) {
+
+		
+		return getInstance().props.getProperty(key);
+
 	}
 
-	public static String[] getBrowsers() {
-		String browsers = getprop(BROWSERS);
+	public boolean useGrid() {
+		try {
+			String value = getprop(USE_GRID);
+			return Boolean.parseBoolean(value);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public String getGridHubUrl() {
+		return getprop(GRID_HUB_URL);
+
+	}
+
+	public String[] getBrowsers() {
+		String browsers = getInstance().props.getProperty(BROWSERS);
 		return browsers.split(",");
 	}
 }

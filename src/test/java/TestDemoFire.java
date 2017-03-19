@@ -6,12 +6,12 @@ import org.testng.annotations.Test;
 import cofig.ConfigManager;
 import core.WebDriverManager;
 
-public class TestDemoFire {
+public class TestDemoFire extends BaseTest{
 
 	
 	@Test
 	public void logintest(){
-		WebDriver driver = WebDriverManager.getDriver(ConfigManager.getBrowsers()[0]);
+		WebDriver driver = WebDriverManager.getDriver(config.getBrowsers()[0]);
 		driver.get("http://demo.testfire.net/");
 		driver.findElement(By.linkText("ONLINE BANKING LOGIN")).click();
 		driver.findElement(By.id("uid")).sendKeys("john");

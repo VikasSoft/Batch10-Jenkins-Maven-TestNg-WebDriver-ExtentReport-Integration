@@ -9,13 +9,13 @@ import core.WebDriverManager;
 
 
 
-public class DemoTestSite {
+public class DemoTestSite extends BaseTest {
 	
 	@Test
 	public void demosite()
 	{
 		//System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
-		WebDriver driver = WebDriverManager.getDriver(ConfigManager.getBrowsers()[0]);
+		WebDriver driver = WebDriverManager.getDriver(config.getBrowsers()[0]);
 		driver.get("http://www.way2automation.com/demo.html");
 	
 	driver.findElement(By.xpath(".//*[@id='toggleNav']/li[7]/a")).click();

@@ -8,7 +8,7 @@ import cofig.ConfigManager;
 import core.WebDriverManager;
 import utils.SyncUtils;
 
-public class ParalleltestsExample1 {
+public class ParalleltestsExample1 extends BaseTest{
 
 	private static final String GOOGLE_DATA_PROVIDER="GoogleDataProvider";
 	
@@ -22,7 +22,7 @@ public class ParalleltestsExample1 {
 	}
 	@Test
 	public void testFacebook(){
-		WebDriver driver = WebDriverManager.getDriver(ConfigManager.getBrowsers()[0]);
+		WebDriver driver = WebDriverManager.getDriver(config.getBrowsers()[0]);
 		driver.get("http://facebook.com");
 		SyncUtils.waitForSeconds(5);
 		driver.quit();
@@ -30,14 +30,14 @@ public class ParalleltestsExample1 {
 	}
 	@Test
 	public void testCricInfo(){
-		WebDriver driver = WebDriverManager.getDriver(ConfigManager.getBrowsers()[0]);
+		WebDriver driver = WebDriverManager.getDriver(config.getBrowsers()[0]);
 		driver.get("http://espncrcinfo.com");
 		SyncUtils.waitForSeconds(5);
 		driver.quit();
 	}
 	@Test
 	public void testGmail(){
-		WebDriver driver = WebDriverManager.getDriver(ConfigManager.getBrowsers()[0]);
+		WebDriver driver = WebDriverManager.getDriver(config.getBrowsers()[0]);
 		driver.get("http://gmail.com");
 		SyncUtils.waitForSeconds(5);
 		driver.quit();
@@ -51,7 +51,7 @@ public class ParalleltestsExample1 {
 	}
 	
 	public Object[][] injectBrowser(Object[][] data){
-		String[] browsers = ConfigManager.getBrowsers();
+		String[] browsers = config.getBrowsers();
 		
 		Object temp [][] = new Object[data.length * browsers.length][2];
 		int i=0;
