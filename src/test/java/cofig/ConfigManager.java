@@ -42,6 +42,14 @@ public class ConfigManager {
 	}
 
 	public boolean useGrid() {
+		// First check system property is present
+		String useGrid = System.getProperty(USE_GRID);
+		if(useGrid!=null){
+			// system property is present, so using this value
+			return Boolean.parseBoolean(useGrid);
+		}
+		
+		// else read from configuration file
 		try {
 			String value = getprop(USE_GRID);
 			return Boolean.parseBoolean(value);
