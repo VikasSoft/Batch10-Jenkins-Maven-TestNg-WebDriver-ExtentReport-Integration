@@ -17,9 +17,9 @@ public class ConfigManager {
 	private ConfigManager() {
 		props = new Properties();
 	}
-	
-	public static ConfigManager getInstance(){
-		
+
+	public static ConfigManager getInstance() {
+
 		if (configInstance == null) {
 			// load from file
 			try {
@@ -34,9 +34,9 @@ public class ConfigManager {
 		}
 		return configInstance;
 	}
+
 	public String getprop(String key) {
 
-		
 		return getInstance().props.getProperty(key);
 
 	}
@@ -44,11 +44,11 @@ public class ConfigManager {
 	public boolean useGrid() {
 		// First check system property is present
 		String useGrid = System.getProperty(USE_GRID);
-		if(useGrid!=null){
+		if (useGrid != null) {
 			// system property is present, so using this value
 			return Boolean.parseBoolean(useGrid);
 		}
-		
+
 		// else read from configuration file
 		try {
 			String value = getprop(USE_GRID);
@@ -59,6 +59,13 @@ public class ConfigManager {
 	}
 
 	public String getGridHubUrl() {
+		// First check system property is present
+		String gridUrl = System.getProperty(GRID_HUB_URL);
+		if (gridUrl != null) {
+			// system property is present, so using this value
+			return gridUrl;
+		}
+
 		return getprop(GRID_HUB_URL);
 
 	}
